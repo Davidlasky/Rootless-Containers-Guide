@@ -21,6 +21,17 @@ echo \
 sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
  ```
+### Setup correct user namespace subuid and subgid mapping for each user
+Remember to replace the id and user name in the following code snippet.
+Again, this guide is made for production usage, which assumes UID/GID to be very large, way bigger than 65536
+```bash
+sudo usermod --add-subuids $(($(id -u) + 1))-$((2*$(id -u) + 1)) "$(id -un)"
+sudo usermod --add-subgids $(($(id -g) + 1))-$((2*$(id -g) + 1)) "$(id -un)"
+```
+If that's not the case, just set the interval larger.
+```bash
+sudo usermod --add-subuids 100000-200000 --add-subgids 100000-200000 $(whoami)
+```
 
 # For Users:
 ## Install Docker Rootless Mode:
