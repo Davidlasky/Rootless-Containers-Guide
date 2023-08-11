@@ -6,12 +6,12 @@ This repo is about installation of commonly used rootless containers and their u
 ## Why Docker Rootless? 
 Since one of the biggest security issues with Docker is that, its daemon runs as a root user. The main concern when running any program as the root user lies in potential vulnerabilities. If a vulnerability is found in the software run by root, the attacker has instant access to the entire system. Thankfully Docker introduced Docker rootless mode. The Rootless mode allows users to run the Docker daemon and containers as a non-root user. This mitigates the potential vulnerabilities in the daemon and the container runtime. As long as the prerequisites are met, rootless mode does not require root privileges even during the installation of the Docker daemon. 
 
-Here is the guide of docker and docker rootless mode [docker rootless guide](https://github.com/Davidlasky/Rootless-Containers-Guide/blob/main/Docker%20Rootless%20Guide.md)
+Here is the [guide of docker and docker rootless mode](https://github.com/Davidlasky/Rootless-Containers-Guide/blob/main/Docker%20Rootless%20Guide.md)
 
 ## What about Podman?
 Personally I'd recommend Podman over Docker and Docker Rootless. Podman follows the OCI standard and has been designed since its inception to be a close replacement to Docker. It runs rootlessly by design. though the only confusing piece of this is that a Podman container running as a non-root user will run within the user namespace. Also, one of the primary "selling" points of Podman is the fact that it runs "daemonless". To the average user this likely means very little, but from a security standpoint it means a LOT.  
 
-However, updates of Podman is falling far behind on Ubuntu. Only Ubuntu 20.10 and above have it included in the apt packages, and it's version 3.4.4, while the latest is 4.5.X. Most companies still use Ubuntu 18.04 and 20.04 for production, and downloading Podman 3.4.2 from Kubic repo is NOT recommended for PRODUCTION use. 
+However, updates of Podman is falling far behind on Ubuntu. Only Ubuntu 20.10 and above have it included in the apt packages, and it's version 3.4.4, while the latest is 4.5.X. Most companies still use Ubuntu 18.04 and 20.04 for production, and downloading Podman 3.4.2 from Kubic repo is NOT recommended for PRODUCTION use. With that being said, I still made a [Podman Guide](https://github.com/Davidlasky/Rootless-Containers-Guide/blob/main/Podman%20Guide.md), just in case someone adventurous wanna try it out :)
 
 Manual compilation of latest Podman is doable and fully functioning on Ubuntu 20.04, but HIGHLY NOT recommended! It took me three days to deal with weird compilation errors, installation of various dependencies,and package conflicts :(  
 
