@@ -19,3 +19,9 @@ Manual compilation of latest Podman is doable and fully functioning on Ubuntu 20
 The entrypoint.sh file is made specifically for rootless containers such as podman and docker rootless mode, where the default user in the container is root with id 0. In production environment, we need to mount files and directories into the container, which by default are all owned by root:root(USER:GROUP). We need to change the USER to the real user name to have correct access to the moutned files and directories,  pretending we are the user, yet we are STILL ROOT.
 
 It's worth noting that even though our user name is changed to the real user name on the host machine, from the container's perspective of view, we're still root with UID and GID 0. This id issue may cause some troubles. Watch out for apps and verifications that read user id UID. If such problem occurs, modify the entrypoint file as intended.
+
+### Usage
+Add '--entrypoint' option after docker run or podman run command, add '-v' option to mount directories into the container, add '-w' to specify workspace directory inside the container. e.g.
+```
+docker run --rm -it --entrypoint PATH-TO-THE-FILE -e USER -v /home/david/.ssh:/home/david/.ssh -v /home/david/test:/home/david/test -w /home/david/test myimage bash
+```
